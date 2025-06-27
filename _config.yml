@@ -3,14 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: Churk's Blog
 subtitle: ''
 description: ''
 keywords:
-author: John Doe
+author: Churk Ben
 language: zh-CN
 timezone: ''
-
+markdown:
+  plugins:
+    - "@traptitech/markdown-it-katex"
+    
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: https://churk.top
