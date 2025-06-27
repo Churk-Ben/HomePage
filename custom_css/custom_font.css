@@ -1,0 +1,16 @@
+@font-face {
+    font-family: "Maple Mono";
+    src: url("/custom_fonts/MapleMono-Regular.woff2") format("woff2"),
+        url("/custom_fonts/MapleMono-Regular.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Maple Mono CN";
+    src: url("/custom_fonts/MapleMono-CN-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
