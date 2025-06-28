@@ -1,0 +1,763 @@
+--- 
+title: LevOJ - 第一期
+date: 2024-10-02 12:57:00
+categories: [OJ题解]
+tags: [LevOJ, C语言]
+excerpt: LevOJ.sln ——原神，启动！！！！
+math: true
+---
+
+# LevOJ平台.sln
+## P1001 a+b的问题
+### 问题描述
+![](https://img2024.cnblogs.com/blog/3074083/202410/3074083-20241002121504512-1772241490.png)
+
+### 解决方法
+
+```c
+#include <stdio.h>
+
+int main()
+{
+    int a, b;
+    scanf("%d%d", &a, &b);
+    printf("%d\n", a + b);
+    return 0;
+}
+```
+
+## P1031 三角形的面积
+### 问题描述
+![](https://img2024.cnblogs.com/blog/3074083/202410/3074083-20241002121553994-344326928.png)
+
+### 解决方法
+
+```c
+#include <stdio.h>
+#include <math.h>
+
+int main()
+{
+    double a, b, c, s, area;
+    while (scanf("%lf %lf %lf", &a, &b, &c) != EOF)
+    {
+        if ((a + b > c) && (a + c > b) && (b + c > a))
+        {
+            s = (a + b + c) / 2.0;
+
+            area = sqrt(s * (s - a) * (s - b) * (s - c));
+
+            printf("%.2f\n", area);
+        }
+        else
+        {
+            printf("-1\n");
+        }
+    }
+
+    return 0;
+}
+```
+
+## P1048 商和余数
+### 问题描述
+![](https://img2024.cnblogs.com/blog/3074083/202410/3074083-20241002122028409-229740102.png)
+
+### 解决方法 
+```c
+#include <stdio.h>
+
+int main()
+{
+    int a, b, c, d;
+    while (scanf("%d%d", &a, &b) != EOF)
+    {
+        c = a / b;
+        d = a % b;
+        printf("%d %d\n", c, d);
+    }
+
+    return 0;
+}
+```
+## P1049 求表达式值
+### 问题描述
+![](https://img2024.cnblogs.com/blog/3074083/202410/3074083-20241002123037268-1359270074.png)
+
+### 解决方法
+```c
+#include <stdio.h>
+
+int main()
+{
+    int a;
+    float x, y;
+    while (scanf("%d %f %f", &a, &x, &y) != EOF)
+    {
+        float result = x + a % 3 * (int)(x + y) % 2 / 4;
+        printf("%.6f\n", result);
+    }
+
+    return 0;
+}
+
+```
+
+## P1515 判断两个数的大小关系
+### 问题描述
+![](https://img2024.cnblogs.com/blog/3074083/202410/3074083-20241002123118322-1697502746.png)
+
+### 解决方法
+```c
+#include <stdio.h>
+
+int main()
+{
+    int x, y;
+    while (scanf("%d %d", &x, &y) != EOF)
+    {
+        if (x == y)
+        {
+            printf("x==y\n");
+        }
+        else if (x > y)
+        {
+            printf("x>y\n");
+        }
+        else
+        {
+            printf("x<y\n");
+        }
+    }
+
+    return 0;
+}
+
+```
+
+## P1516 判断三角形的形状
+### 问题描述
+![](https://img2024.cnblogs.com/blog/3074083/202410/3074083-20241002123439350-44113159.png)
+
+### 解决方法
+```c
+#include <stdio.h>
+
+int main()
+{
+    int n;
+    scanf("%d", &n); 
+
+    for (int i = 0; i < n; i++) {
+        int a, b, c;
+        scanf("%d %d %d", &a, &b, &c); 
+
+        if (a + b <= c || a + c <= b || b + c <= a) {
+            printf("Not Triangle\n");
+        } 
+        else if (a == b && b == c) {
+            printf("Regular Triangle\n");
+        } 
+        else if (a == b || a == c || b == c) {
+            printf("Isosceles Triangle\n");
+        } 
+        else {
+            printf("Triangle\n");
+        }
+    }
+
+    return 0;
+}
+
+```
+
+## P1991 新BMI公式
+### 问题描述
+![](https://img2024.cnblogs.com/blog/3074083/202410/3074083-20241002123858150-1837763756.png)
+
+### 解决方法
+```c
+#include <stdio.h>
+
+int main()
+{
+    float n, L;
+    while (scanf("%f %f", &n, &L) != EOF)
+    {
+        float bmi = n / (L * L);
+        printf("%.1f\n", bmi);
+        if (bmi > 25)
+            printf("PANG\n");
+        else
+            printf("Hai Xing\n");
+    }
+    return 0;
+}
+```
+
+## P2069 计算摄氏温度
+### 问题描述
+![](https://img2024.cnblogs.com/blog/3074083/202410/3074083-20241002124821921-772104443.png)
+
+### 解决方法
+```c
+#include <stdio.h>
+
+int main()
+{
+    float F;
+    int C;
+    while (scanf("%f", &F) != EOF)
+    {
+        C = 5 * (F - 32) / 9;
+        printf("Celsius = %d\n", C);
+    }
+    return 0;
+}
+
+```
+
+## P2070 比较大小
+### 问题描述
+![](https://img2024.cnblogs.com/blog/3074083/202410/3074083-20241002125437847-734895149.png)
+
+### 解决方法
+```c
+#include <stdio.h>
+
+int main()
+{
+    int a, b, c, t;
+    while (scanf("%d %d %d", &a, &b, &c) != EOF)
+    {
+        if (a > b)
+        {
+            t = a;
+            a = b;
+            b = t;
+        }
+        if (a > c)
+        {
+            t = a;
+            a = c;
+            c = t;
+        }
+        if (b > c)
+        {
+            t = b;
+            b = c;
+            c = t;
+        }
+        printf("%d->%d->%d\n", a, b, c);
+    }
+    return 0;
+}
+```
+
+## P1035 鸡兔同笼问题
+### 问题描述
+![](https://img2024.cnblogs.com/blog/3074083/202410/3074083-20241002125629673-946591957.png)
+
+### 解决方法
+```c
+#include <stdio.h>
+
+int main()
+{
+    int m, n;
+    int a, b;
+
+    while (scanf("%d %d", &m, &n) != EOF)
+    {
+        if ((4 * m - n) % 2 != 0 || n % 2 != 0 || n < 2 * m)
+        {
+            printf("-1 -1\n");
+        }
+        else
+        {
+            a = (4 * m - n) / 2;
+            b = m - a;
+
+            if (a < 0 || b < 0)
+            {
+                printf("-1 -1\n");
+            }
+            else
+            {
+                printf("%d %d\n", a, b);
+            }
+        }
+    }
+
+    return 0;
+}
+
+```
+
+## P1080 水仙花数
+### 问题描述
+![](https://img2024.cnblogs.com/blog/3074083/202410/3074083-20241003233030544-982623469.png)
+
+### 解决方法
+```c
+#include <stdio.h>
+
+int main()
+{
+    int i, j;
+    for (i = 100; i <= 999; i++)
+    {
+        j = ((i / 100) * (i / 100) * (i / 100)) + ((i % 10) * (i % 10) * (i % 10)) + ((i / 10 % 10) * (i / 10 % 10) * (i / 10 % 10));
+        if (i == j)
+        {
+            printf("%d\n", i);
+        }
+    }
+    return 0;
+}
+```
+
+__另解__
+```c
+#include <stdio.h>
+
+int main()
+{
+    int i = 1, j = 0, k = 0, n;
+    while (1)
+    {
+        k += 1;
+        if (k == 10)
+        {
+            j += 1;
+            k = 0;
+        }
+        if (j == 10)
+        {
+            i += 1;
+            j = 0;
+        }
+        n = 100 * i + 10 * j + k;
+
+        if (n == i * i * i + j * j * j + k * k * k)
+        {
+            printf("%d\n", n);
+        }
+        if (i == 9 && j == 9 && k == 9)
+        {
+            break;
+        }
+    }
+
+    return 0;
+}
+```
+
+## P1095 笑笑的烦恼
+### 问题描述
+![](https://img2024.cnblogs.com/blog/3074083/202410/3074083-20241003234559594-1596117036.png)
+
+### 输入输出描述与样例
+![](https://img2024.cnblogs.com/blog/3074083/202410/3074083-20241006214810040-1438413079.png)
+
+### 解决方法
+```c
+#include <stdio.h>
+
+int main()
+{
+    int n, sum, input, j, max, min;
+    float avg;
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++)
+    {
+        sum = 0;
+        j = 0;
+        max = 0;
+        min = 100;
+        while (1)
+        {
+            scanf("%d", &input);
+            if (input == -1)
+            {
+                avg = (float)sum / j;
+                printf("%d\n", j);
+                printf("%d\n", max);
+                printf("%d\n", min);
+                printf("%.1f\n", avg);
+                break;
+            }
+            else
+            {
+                j++;
+                sum += input;
+                if (input > max)
+                {
+                    max = input;
+                }
+                if (input < min)
+                {
+                    min = input;
+                }
+            }
+        }
+    }
+
+    return 0;
+}
+
+```
+
+## P1524 输出100～200之间不能被3整除的数
+### 问题描述
+![](https://img2024.cnblogs.com/blog/3074083/202410/3074083-20241003235123576-1415833719.png)
+
+### 解决方法
+```c
+#include <stdio.h>
+
+int main()
+{
+    int i, cnt;
+    for (i = 100, cnt = 0; i <= 200; ++i)
+    {
+        if (i % 3)
+        {
+            printf("%6d", i);
+            if (++cnt % 6 == 0)
+            {
+                printf("\n");
+            }
+        }
+    }
+    if (cnt % 6)
+    {
+        printf("\n");
+    }
+    return 0;
+}
+```
+__另解__
+```c
+#include <stdio.h>
+
+int main()
+{
+    int j = 0;
+    for (int i = 100; i <= 200; i++)
+    {
+        if (i % 3 == 0)
+        {
+            continue;
+        }
+        j++;
+        printf("%6d", i);
+        if (j % 6 == 0)
+        {
+            printf("\n");
+        }
+    }
+    printf("\n");
+
+    return 0;
+}
+```
+
+## P1103 阶乘之和
+### 问题描述
+![](https://img2024.cnblogs.com/blog/3074083/202410/3074083-20241003235747036-1402368712.png)
+
+### 解决方法
+```c
+#include <stdio.h>
+
+int factorial(int m)
+{
+    if (m == 0)
+        return 1;
+    else
+        return m * factorial(m - 1);
+}
+
+int main()
+{
+    int n;
+    long int sum;
+    while (scanf("%d", &n) != EOF)
+    {
+        sum = 0;
+        for (int i = 0; i <= n; i++)
+        {
+            sum += factorial(i);
+        }
+        printf("%ld\n", sum);
+    }
+    return 0;
+}
+```
+
+## P1102 最大公约数和最小公倍数
+### 问题描述
+![](https://img2024.cnblogs.com/blog/3074083/202410/3074083-20241005134652683-1862842627.png)
+
+### 解决方法
+```c
+#include <stdio.h>
+
+int gcd(int a, int b)
+{
+    if (a % b == 0)
+    {
+        return b;
+    }
+    else
+    {
+        return gcd(b, a % b);
+    }
+}
+
+int lcm(int a, int b)
+{
+    return (a * b) / gcd(a, b);
+}
+
+int main()
+{
+    int a, b;
+    while (scanf("%d %d", &a, &b) != EOF)
+    {
+        printf("%d\n", gcd(a, b));
+        printf("%d\n", lcm(a, b));
+    }
+
+    return 0;
+}
+```
+
+__另解__
+```c
+#include <stdio.h>
+
+int main()
+{
+    int a, b;
+    int i, j;
+    while (scanf("%d%d", &a, &b) != EOF)
+    {
+        i = a;
+        j = b;
+        while (b != 0)
+        {
+            int temp = b;
+            b = a % b;
+            a = temp;
+        }
+        b = i * j / a;
+        printf("%d\n%d\n", a, b);
+    }
+
+    return 0;
+}
+
+```
+
+__关于[辗转相除法](https://zhuanlan.zhihu.com/p/324578532)__
+> 辗转相除法之所以有效是因为其基于一个核心原理，即：
+> 
+> 两个数的最大公约数等于其中较小的数字和二者之间余数的最大公约数
+
+
+
+## P1990 谁先倒
+### 问题描述
+![](https://img2024.cnblogs.com/blog/3074083/202410/3074083-20241005140501248-406249846.png)
+
+### 输入输出描述与样例
+![](https://img2024.cnblogs.com/blog/3074083/202410/3074083-20241006215250068-1003746814.png)
+![](https://img2024.cnblogs.com/blog/3074083/202410/3074083-20241006215319242-1891949695.png)
+
+
+### 解决方法
+```c
+#include <stdio.h>
+
+int main()
+{
+    int n, m, N, a1, a2, b1, b2, sum, i = 0, j = 0;
+    scanf("%d%d", &n, &m);
+    scanf("%d", &N);
+    for (int t = 0; t < N; t++)
+    {
+        scanf("%d%d%d%d", &a1, &a2, &b1, &b2);
+        sum = a1 + b1;
+        if (a2 == b2)
+        {
+            continue;
+        }
+        if (a2 == sum)
+        {
+            i++;
+            if (i > n)
+            {
+                printf("A\n");
+                printf("%d", j);
+                break;
+            }
+        }
+        if (b2 == sum)
+        {
+            j++;
+            if (j > m)
+            {
+                printf("B\n");
+                printf("%d", i);
+                break;
+            }
+        }
+    }
+    return 0;
+}
+
+```
+
+## P2049 十六进制的充值（程序填空题）
+### 问题描述
+![](https://img2024.cnblogs.com/blog/3074083/202410/3074083-20241005140815933-12579062.png)
+![](https://img2024.cnblogs.com/blog/3074083/202410/3074083-20241005141050220-1699803006.png)
+> 坏了，黑暗降临···但素原神里没有钻石啊
+
+### 填空代码
+![](https://img2024.cnblogs.com/blog/3074083/202410/3074083-20241005142354901-625218959.png)
+
+### 解决方法
+```c
+#include <stdio.h>
+
+int cal(int money)
+{
+    // 逐位计算十六进制下比十进制下增加的数值
+    int count = 0, hex_digit = 1, decimal_digit = 1;
+    while (money > 0)
+    {
+        count += (hex_digit - decimal_digit) * (money % 10);
+        money /= 10;
+        hex_digit *= 16;
+        decimal_digit *= 10;
+    }
+    return count;
+}
+
+int main()
+{
+    int money;
+    scanf("%d", &money);
+    printf("%d\n", cal(money));
+    return 0;
+}
+```
+
+## P2071 犯罪嫌疑人
+### 问题描述
+![](https://img2024.cnblogs.com/blog/3074083/202410/3074083-20241005142519380-389300725.png)
+
+### 输入输出描述与样例
+![](https://img2024.cnblogs.com/blog/3074083/202410/3074083-20241005142816090-582088315.png)
+
+### 解决方法
+```c
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    int n;
+    long int a;
+    double b;
+    scanf("%d", &n);
+    for (int i = 0; i < n; i++)
+    {
+        scanf("%ld", &a);
+        b = sqrt(a);
+        if ((int)b==b)
+        {
+            printf("%d\n", (int)b);
+            break;
+        }
+    }
+    
+    return 0;
+}
+```
+
+## P2072 int爆破小队
+### 问题描述
+![](https://img2024.cnblogs.com/blog/3074083/202410/3074083-20241005144048904-50279839.png)
+
+### 解决方法
+```c
+#include <stdio.h>
+
+int main()
+{
+    int n;
+    long long sum = 0, max = 2147483647, min = -2147483648;
+    scanf("%d", &n);
+
+    long long numbers[n];
+
+    for (int i = 0; i < n; i++)
+    {
+        scanf("%lld", &numbers[i]);
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        sum += numbers[i];
+        if (sum > max || sum < min)
+        {
+            printf("%d ", i + 1);
+            break;
+        }
+        if (i + 1 == n)
+        {
+            printf("0");
+        }
+    }
+
+    return 0;
+}
+```
+__另解__
+```c
+#include<stdio.h>
+#include<math.h>
+
+int main()
+{
+    int n,x,i;
+    long long int sum = 0;
+    scanf("%d", &n);
+    for (i = 1; i < n+1; i++)
+    {
+        scanf("%d", &x);
+        sum+= x;
+        if (sum<= -2147483649||sum>=2147483648)
+        {
+            printf("%d\n", i);
+            return 0;
+        }
+        
+    }
+    printf("%d\n", 0);
+
+    return 0;
+}
+
+```
+
+__关于[循环读入](https://docs.pingcode.com/baike/992656)__
+> _我险些红温 为了这题还去把数组学了_
+> 
+> 循环读入，这一篇文章应该够了
+
+# 第一期完结！
+__看完了点个赞再走嘛__

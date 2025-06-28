@@ -1,6 +1,11 @@
 ---
 title: Hello World
 date: 2025-06-27 23:01:03
+banner_img:
+index_img:
+categories: [文档]
+tags: [Fluid]
+excerpt: 第一次用Hexo搭建博客。
 hide: true
 ---
 Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).

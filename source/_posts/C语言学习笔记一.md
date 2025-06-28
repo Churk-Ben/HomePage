@@ -1,10 +1,9 @@
 ---
 title: C语言学习笔记一
 date: 2024-09-25 21:01:00
-categories:
-    - 学习笔记
-tags:
-    - C语言
+categories: [学习笔记]
+tags: [C语言]
+excerpt: c语言de学习
 math: true
 ---
 
