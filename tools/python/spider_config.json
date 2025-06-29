@@ -1,0 +1,7 @@
+{
+    "use_login": true,
+    "username": "",
+    "password": "",
+    "cookies_path": "cookies/default_cookies.pkl",
+    "site_specific_cookies": true
+}
