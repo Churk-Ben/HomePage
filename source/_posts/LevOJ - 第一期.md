@@ -1,3 +1,12 @@
+---
+title: LevOJ - 第一期
+date: 2024-10-02 12:57:00
+categories: [OJ题解]
+tags: [LevOJ, C语言]
+excerpt: LevOJ.sln ——原神，启动！！！！
+math: true
+---
+
 # LevOJ平台.sln
 
 ## P1001 a+b的问题
