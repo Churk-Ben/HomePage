@@ -1,0 +1,726 @@
+#任务一 至 任务三
+__验证性实验略__
+> 终于优化了（）
+
+#任务四
+##图书销量统计
+###源码
+```c
+#include <stdio.h>
+#define N 10
+
+typedef struct
+{
+    char isbn[20];      // isbn号
+    char name[80];      // 书名
+    char author[80];    // 作者
+    double sales_price; // 售价
+    int sales_count;    // 销售册数
+} Book;
+
+void output(Book x[], int n);
+void sort(Book x[], int n);
+double sales_amount(Book x[], int n);
+
+int main()
+{
+    Book x[N] = {{"978-7-5327-6082-4", "门将之死", "罗纳德.伦", 42, 51},
+                 {"978-7-308-17047-5", "自由与爱之地：入以色列记", "云也退", 49, 30},
+                 {"978-7-5404-9344-8", "伦敦人", "克莱格泰勒", 68, 27},
+                 {"978-7-5447-5246-6", "软件体的生命周期", "特德姜", 35, 90},
+                 {"978-7-5722-5475-8", "芯片简史", "汪波", 74.9, 49},
+                 {"978-7-5133-5750-0", "主机战争", "布莱克.J.哈里斯", 128, 42},
+                 {"978-7-2011-4617-1", "世界尽头的咖啡馆", "约翰·史崔勒基", 22.5, 44},
+                 {"978-7-5133-5109-6", "你好外星人", "英国未来出版集团", 118, 42},
+                 {"978-7-1155-0509-5", "无穷的开始:世界进步的本源", "戴维·多伊奇", 37.5, 55},
+                 {"978-7-229-14156-1", "源泉", "安.兰德", 84, 59}};
+
+    printf("图书销量排名(按销售册数): \n");
+    sort(x, N);
+    output(x, N);
+
+    printf("\n图书销售总额: %.2f\n", sales_amount(x, N));
+
+    return 0;
+}
+
+// 待补足：函数output()实现
+void output(Book x[], int n)
+{
+    printf("ISBN号\t\t\t 书名\t\t\t\t 作者\t\t\t 售价\t 销售册数\n");
+    for (int i = 0; i < n; i++)
+    {
+        printf("%-15s\t %-25s\t %-20s\t %-5g\t %-5d\n", x[i].isbn, x[i].name, x[i].author, x[i].sales_price, x[i].sales_count);
+    }
+    // 调死我了这里输出
+}
+
+// 待补足：函数sort()实现
+void sort(Book x[], int n)
+{
+    for (int i = 0; i < n - 1; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            if (x[i].sales_count < x[j].sales_count)
+            {
+                Book temp = x[i];
+                x[i] = x[j];
+                x[j] = temp;
+            }
+        }
+    }
+}
+
+// 待补足：函数sales_amount()实现
+double sales_amount(Book x[], int n)
+{
+    double sum = 0;
+    for (int i = 0; i < n; i++)
+    {
+        sum += x[i].sales_price * x[i].sales_count;
+    }
+    return sum;
+}
+
+```
+###结果
+![](https://img2024.cnblogs.com/blog/3074083/202412/3074083-20241215234652313-593244781.png)
+
+
+#任务五
+##Chloris是谁？？
+###源码
+```c
+#include <stdio.h>
+#include <math.h> // 我在这里偷偷用了个math库
+
+typedef struct
+{
+    int year;
+    int month;
+    int day;
+} Date;
+
+// 函数声明
+void input(Date *pd);                // 输入日期给pd指向的Date变量
+int day_of_year(Date d);             // 返回日期d是这一年的第多少天
+int compare_dates(Date d1, Date d2); // 比较两个日期:
+                                     // 如果d1在d2之前，返回-1;
+                                     // 如果d1在d2之后，返回1
+                                     // 如果d1和d2相同，返回0
+
+void test1()
+{
+    Date d;
+    int i;
+
+    printf("输入日期:(以形如2024-12-16这样的形式输入)\n");
+    for (i = 0; i < 3; ++i)
+    {
+        input(&d);
+        printf("%d-%02d-%02d是这一年中第%d天\n\n", d.year, d.month, d.day, day_of_year(d));
+    }
+}
+
+void test2()
+{
+    Date Churk_birth, Chloris_birth;
+    int i;
+    int ans;
+
+    printf("输入Churk和Chloris出生日期:(以形如2024-12-16这样的形式输入)\n");
+    for (i = 0; i < 3; ++i)
+    {
+        input(&Churk_birth);
+        input(&Chloris_birth);
+        ans = compare_dates(Churk_birth, Chloris_birth);
+
+        if (ans == 0)
+            printf("Churk和Chloris一样大\n\n");
+        else if (ans == -1)
+            printf("Churk比Chloris大\n\n");
+        else
+            printf("Churk比Chloris小\n\n");
+    }
+}
+
+int main()
+{
+    printf("测试1: 输入日期, 打印输出这是一年中第多少天\n");
+    test1();
+
+    printf("\n测试2: 两个人年龄大小关系\n");
+    test2();
+}
+
+// 补足函数input实现
+// 功能: 输入日期给pd指向的Date变量
+void input(Date *pd)
+{
+    scanf("%d-%d-%d", &pd->year, &pd->month, &pd->day);
+}
+
+// 补足函数day_of_year实现
+// 功能：返回日期d是这一年的第多少天
+int day_of_year(Date d)
+{
+    int days_of_month[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    int days = 0;
+
+    if ((d.year % 4 == 0 && d.year % 100 != 0) || d.year % 400 == 0)
+        days_of_month[1]++;
+
+    for (int i = 1; i < d.month; i++)
+        days += days_of_month[i - 1];
+
+    days += d.day;
+    return days;
+}
+
+// 补足函数compare_dates实现
+// 功能：比较两个日期:
+// 如果d1在d2之前，返回-1;
+// 如果d1在d2之后，返回1
+// 如果d1和d2相同，返回0
+int compare_dates(Date d1, Date d2)// 我在这里偷偷用了个math库
+{
+    int cmp_year = d1.year - d2.year;
+    if (cmp_year != 0)
+        return cmp_year / abs(cmp_year);
+
+    int cmp_month = d1.month - d2.month;
+    if (cmp_month != 0)
+        return cmp_month / abs(cmp_month);
+
+    int cmp_day = d1.day - d2.day;
+    if (cmp_day != 0)
+        return cmp_day / abs(cmp_day);
+
+    return 0;
+}
+```
+###结果
+![](https://img2024.cnblogs.com/blog/3074083/202412/3074083-20241216001129300-605876384.png)
+
+
+#任务六
+##账户
+###源码
+```c
+#include <stdio.h>
+#include <string.h>
+
+enum Role
+{
+    admin,
+    student,
+    teacher
+};
+
+typedef struct
+{
+    char username[20]; // 用户名
+    char password[20]; // 密码
+    enum Role type;    // 账户类型
+} Account;
+
+// 函数声明
+void output(Account x[], int n); // 输出账户数组x中n个账户信息，其中，密码用*替代显示
+
+int main()
+{
+    Account x[] = {{"A1001", "123456", student},
+                   {"A1002", "123abcdef", student},
+                   {"A1009", "xyz12121", student},
+                   {"X1009", "9213071x", admin},
+                   {"C11553", "129dfg32k", teacher},
+                   {"X3005", "921kfmg917", student}};
+    int n;
+    n = sizeof(x) / sizeof(Account);
+    output(x, n);
+
+    return 0;
+}
+
+// 待补足的函数output()实现
+// 功能：遍历输出账户数组x中n个账户信息
+//      显示时，密码字段以与原密码相同字段长度的*替代显示
+void output(Account x[], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        printf("%-10s", x[i].username);
+        for (int j = 0; j < (int)strlen(x[i].password); j++)
+            printf("*");
+        printf("\t");
+        if (x[i].type == admin)
+            printf("admin\n");
+        else if (x[i].type == student)
+            printf("student\n");
+        else if (x[i].type == teacher)
+            printf("teacher\n");
+    }
+}
+```
+###结果
+![](https://img2024.cnblogs.com/blog/3074083/202412/3074083-20241216002240714-695813715.png)
+
+
+#任务七
+##我看到了 生生不息的激荡！！
+###源码
+```c
+#include <stdio.h>
+#include <string.h>
+
+typedef struct
+{
+    char name[20];  // 姓名
+    char phone[12]; // 手机号
+    int vip;        // 是否为紧急联系人，是取1；否则取0
+} Contact;
+
+int vip_cnt; // 偷偷全局了一个紧急联系人个数
+
+// 函数声明
+void set_vip_contact(Contact x[], int n, char name[]); // 设置紧急联系人
+void output(Contact x[], int n);                       // 输出x中联系人信息
+void display(Contact x[], int n);                      // 按联系人姓名字典序升序显示信息，紧急联系人最先显示
+void sort(Contact x[], int n);                         // 按姓名字典序排序联系人信息
+
+#define N 10
+int main()
+{
+    Contact list[N] = {
+        {"齐夏", "15510846604", 0},
+        {"楚天秋", "15552933732", 0},
+        {"秦丁冬", "18820725036", 0},
+        {"燕知春", "18077702405", 0},
+        {"乔家劲", "18038747351", 0},
+        {"陈俊男", "17705843215", 0},
+        {"余念安", "18853253914", 0},
+        {"钱五", "15547571923", 0},
+        {"周六", "18856659351", 0},
+        {"宋七", "13230584477", 0},
+    };
+
+    int i;
+    char name[20];
+
+    printf("显示原始通讯录信息: \n");
+    output(list, N);
+
+    printf("\n输入要设置的紧急联系人个数: ");
+    scanf("%d", &vip_cnt);
+
+    printf("输入%d个紧急联系人姓名:\n", vip_cnt);
+    for (i = 0; i < vip_cnt; ++i)
+    {
+        scanf("%s", name);
+        set_vip_contact(list, N, name);
+    }
+
+    printf("\n显示通讯录列表:(按姓名字典序升序排列,紧急联系人最先显示)\n");
+    display(list, N);
+
+    return 0;
+}
+
+// 补足函数set_vip_contact实现
+// 功能：将联系人数组x中，联系人姓名与name一样的人，设置为紧急联系人（即成员vip值设为1）
+void set_vip_contact(Contact x[], int n, char name[])
+{
+    for (int i = 0; i < N; i++)
+    {
+        if (strcmp(x[i].name, name) == 0)
+        {
+            x[i].vip = 1;
+        }
+    }
+}
+
+// 补足函数display实现
+// 功能: 显示联系人数组x中的联系人信息
+//      按姓名字典序升序显示, 紧急联系人显示在最前面
+void display(Contact x[], int n)
+{
+    sort(x, n);
+    output(x, n);
+}
+
+void output(Contact x[], int n)
+{
+    int i;
+
+    for (i = 0; i < n; ++i)
+    {
+        printf("%-10s%-15s", x[i].name, x[i].phone);
+        if (x[i].vip)
+            printf("%5s", "*");
+        printf("\n");
+    }
+}
+
+void sort(Contact x[], int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            if (x[i].vip < x[j].vip)
+            {
+                Contact temp = x[i];
+                x[i] = x[j];
+                x[j] = temp;
+            }
+        }
+    }
+    for (int i = 0; i < vip_cnt; i++)
+    {
+        for (int j = i + 1; j < vip_cnt; j++)
+        {
+            if (strcmp(x[i].name, x[j].name) > 0)
+            {
+                Contact temp = x[i];
+                x[i] = x[j];
+                x[j] = temp;
+            }
+        }
+    }
+    for (int i = vip_cnt; i < n; i++)
+    {
+        for (int j = i + 1; j < n; j++)
+        {
+            if (strcmp(x[i].name, x[j].name) > 0)
+            {
+                Contact temp = x[i];
+                x[i] = x[j];
+                x[j] = temp;
+            }
+        }
+    }
+}
+```
+###结果
+![](https://img2024.cnblogs.com/blog/3074083/202412/3074083-20241216011526714-59761839.png)
+
+#附录
+##任务一至任务三源码
+###任务一
+```c
+// P286例8.17
+// 对教材示例代码作了微调，把输出学生信息单独编写成一个函数模块
+// 打印不及格学生信息、打印所有学生信息均调用该模块实现
+
+#include <stdio.h>
+#include <string.h>
+#define N 2 // 运行程序输入测试时，可以把N改小一些输入测试
+
+typedef struct student
+{
+	int id;			  // 学号
+	char name[20];	  // 姓名
+	char subject[20]; // 考试科目
+	double perf;	  // 平时成绩
+	double mid;		  // 期中成绩
+	double final;	  // 期末成绩
+	double total;	  // 总评成绩
+	char level[10];	  // 成绩等级
+} STU;
+
+void input(STU[], int);		 // 录入学生信息
+void output(STU[], int);	 // 输出学生信息
+void calc(STU[], int);		 // 计算总评和等级
+int fail(STU[], STU[], int); // 统计不及格学生信息
+void sort(STU[], int);		 // 排序
+
+int main()
+{
+	STU st[N], fst[N]; // 数组st记录学生信息，fst记录不及格学生信息
+	int k;			   // 用于记录不及格学生个数
+
+	printf("录入学生成绩信息:\n");
+	input(st, N);
+
+	printf("\n成绩处理...\n");
+	calc(st, N);
+
+	k = fail(st, fst, N);
+	sort(st, N);
+	printf("\n学生成绩排名情况:\n");
+	output(st, N);
+
+	printf("\n不及格学生信息:\n");
+	output(fst, k);
+
+	return 0;
+}
+
+void input(STU s[], int n)
+{
+	int i;
+
+	for (i = 0; i < n; i++)
+		scanf("%d %s %s %lf %lf %lf", &s[i].id, s[i].name, s[i].subject,
+			  &s[i].perf, &s[i].mid, &s[i].final);
+}
+
+void output(STU s[], int n)
+{
+	int i;
+
+	printf("-----------------\n");
+	printf("学号   姓名     科目   平时   期中   期末   总评   等级\n");
+	for (i = 0; i < n; i++)
+		printf("%d   %-6s   %-4s   %-4.0f   %-4.0f   %-4.0f   %-4.1f   %s\n", s[i].id, s[i].name, s[i].subject, s[i].perf, s[i].mid, s[i].final, s[i].total, s[i].level);
+}
+
+void calc(STU s[], int n)
+{
+	int i;
+
+	for (i = 0; i < n; i++)
+	{
+		s[i].total = s[i].perf * 0.2 +
+					 s[i].mid * 0.2 +
+					 s[i].final * 0.6;
+
+		if (s[i].total >= 90)
+			strcpy(s[i].level, "优");
+		else if (s[i].total >= 80)
+			strcpy(s[i].level, "良");
+		else if (s[i].total >= 70)
+			strcpy(s[i].level, "中");
+		else if (s[i].total >= 60)
+			strcpy(s[i].level, "及格");
+		else
+			strcpy(s[i].level, "不及格");
+	}
+}
+
+int fail(STU s[], STU t[], int n)
+{
+	int i, cnt = 0;
+
+	for (i = 0; i < n; i++)
+		if (s[i].total < 60)
+			t[cnt++] = s[i];
+
+	return cnt;
+}
+
+void sort(STU s[], int n)
+{
+	int i, j;
+	STU t;
+
+	for (i = 0; i < n - 1; i++)
+		for (j = 0; j < n - 1 - i; j++)
+			if (s[j].total < s[j + 1].total)
+			{
+				t = s[j];
+				s[j] = s[j + 1];
+				s[j + 1] = t;
+			}
+}
+```
+###任务二
+```c
+#include <stdio.h>
+#include <string.h>
+#define N 10
+#define M 80
+
+typedef struct
+{
+    char name[M];   // 书名
+    char author[M]; // 作者
+} Book;
+
+int main()
+{
+    Book x[N] = {{"《一九八四》", "乔治.奥威尔"},
+                 {"《美丽新世界》", "赫胥黎"},
+                 {"《昨日的世界》", "斯蒂芬.茨威格"},
+                 {"《万历十五年》", "黄仁宇"},
+                 {"《一只特立独行的猪》", "王小波"},
+                 {"《百年孤独》", "马尔克斯"},
+                 {"《查令十字街84号》", "海莲.汉芙"},
+                 {"《只是孩子》", "帕蒂.史密斯"},
+                 {"《刀锋》", "毛姆"},
+                 {"《沉默的大多数》", "王小波"}};
+    Book *ptr;
+    int i;
+    char author[M];
+    int found;
+
+    // 使用指针遍历结构体数组
+    printf("-------------------所有图书信息-------------------\n");
+    for (ptr = x; ptr < x + N; ++ptr)
+        printf("%-30s%-30s\n", ptr->name, ptr->author);
+
+    // 查找指定作者的图书
+    printf("\n-------------------按作者查询图书-------------------\n");
+    printf("输入作者名: ");
+    gets(author);
+    found = 0;
+    for (ptr = x; ptr < x + N; ++ptr)
+        if (strcmp(ptr->author, author) == 0)
+        {
+            found = 1;
+            printf("%-30s%-30s\n", ptr->name, ptr->author);
+        }
+
+    if (!found)
+        printf("暂未收录该作者书籍!\n");
+
+    return 0;
+}
+```
+###任务三
+__Task1__
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#define N 80
+
+typedef struct FilmInfo
+{
+    char name[N];
+    char director[N];
+    char region[N];
+    int year;
+    struct FilmInfo *next;
+} Film;
+
+void output(Film *head);         // 遍历输出链表信息
+Film *insert(Film *head, int n); // 向链表中插入n个结点，返回头指针
+
+int main()
+{
+    int n;      // 结点数
+    Film *head; // 头指针变量，存放链表中第一个节点的地址
+
+    head = NULL;
+    printf("输入影片数目: ");
+    scanf("%d", &n);
+
+    // 向链表中插入n部影片信息
+    head = insert(head, n);
+
+    // 遍历输出链表中所有影片信息
+    printf("\n所有影片信息如下: \n");
+    output(head);
+
+    return 0;
+}
+
+// 向链表中插入n个结点，从表头插入，返回头指针变量
+Film *insert(Film *head, int n)
+{
+    int i;
+    Film *p;
+
+    for (i = 1; i <= n; ++i)
+    {
+        p = (Film *)malloc(sizeof(Film));
+        printf("请输入第%d部影片信息: ", i);
+        scanf("%s %s %s %d", p->name, p->director, p->region, &p->year);
+
+        // 把结点从表头插入到链表中
+        p->next = head;
+        head = p; // 更新头指针变量
+    }
+
+    return head;
+}
+
+// 遍历输出链表信息
+void output(Film *head)
+{
+    Film *p;
+
+    p = head;
+    while (p != NULL)
+    {
+        printf("%-20s %-20s %-20s %d\n", p->name, p->director, p->region, p->year);
+        p = p->next;
+    }
+}
+```
+__Task2__
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#define N 80
+
+typedef struct FilmInfo
+{
+    char name[N];
+    char director[N];
+    char region[N];
+    int year;
+    struct FilmInfo *next;
+} Film;
+
+void output(Film *head);         // 遍历输出链表信息
+Film *insert(Film *head, int n); // 向链表中插入n个结点，返回头指针
+
+int main()
+{
+    int n;      // 结点数
+    Film *head; // 头指针变量，存放链表中第一个节点的地址
+    Film *p;    // 存放新申请的Film节点内存空间地址
+
+    // 创建头结点
+    p = (Film *)malloc(sizeof(Film));
+    p->next = NULL;
+    head = p; // 头指针变量存放头节点的地址
+
+    printf("输入影片数目: ");
+    scanf("%d", &n);
+
+    // 向链表中插入n部影片信息
+    head = insert(head, n);
+
+    // 遍历输出链表中所有影片信息
+    printf("\n所有影片信息如下: \n");
+    output(head);
+
+    return 0;
+}
+
+// 向链表中插入n个结点，从表头插入，返回头指针变量
+Film *insert(Film *head, int n)
+{
+    int i;
+    Film *p;
+
+    for (i = 1; i <= n; ++i)
+    {
+        p = (Film *)malloc(sizeof(Film));
+        printf("请输入第%d部影片信息: ", i);
+        scanf("%s %s %s %d", p->name, p->director, p->region, &p->year);
+
+        // 把结点从表头插入到链表中
+        p->next = head->next;
+        head->next = p;
+    }
+
+    return head;
+}
+
+// 遍历输出链表信息
+void output(Film *head)
+{
+    Film *p;
+
+    p = head->next;
+    while (p != NULL)
+    {
+        printf("%-20s %-20s %-20s %d\n", p->name, p->director, p->region, p->year);
+        p = p->next;
+    }
+}
+```

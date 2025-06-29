@@ -1,0 +1,615 @@
+#LevOJ平台.sln
+
+##P2097 乘法口诀数列
+###问题描述
+![](https://img2024.cnblogs.com/blog/3074083/202411/3074083-20241110203822643-267959837.png)
+
+###解决方法
+```c
+#include <stdio.h>
+
+int main() {
+    int ans[100];
+    int a1,a2,n;
+    scanf("%d%d%d",&a1,&a2,&n);
+    ans[0]=a1;
+    ans[1]=a2;
+    int j=2;
+    for(int i=0;i<10;i++){
+        if (ans[i]*ans[i+1]>9)
+        {
+            ans[j]=(ans[i]*ans[i+1])/10;
+            j++;
+            ans[j]=(ans[i]*ans[i+1])%10;
+            j++;
+        }
+        else
+        {
+            ans[j]=ans[i]*ans[i+1];
+            j++;
+        }
+    }
+    for(int i=0;i<n;i++){
+        printf("%d ",ans[i]);
+    }
+    printf("\n");
+    return 0;
+}
+```
+##P2098 试试手气
+###问题描述
+![](https://img2024.cnblogs.com/blog/3074083/202411/3074083-20241110203905865-396327896.png)
+
+###解决方法
+```c
+#include <stdio.h>
+
+int main()
+{
+    int index[6][6] = {0};
+    int n;
+    for (int i = 0; i < 6; i++)
+    {
+        scanf("%d", &index[0][i]);
+    }
+    scanf("%d", &n);
+    for (int i = 0; i < 6; i++)
+    {
+        int temp = 6;
+        for (int j = 1; j <= 5;)
+        {
+            if (temp==index[0][i])
+            {
+                temp--;
+            }
+            else
+            {
+                index[j][i] = temp;
+                temp--;
+                j++;
+            }
+        }
+    }
+    for (int i = 0; i < 6; i++)
+    {
+        printf("%d ", index[n][i]);
+    }
+    printf("\n");
+    return 0;
+}
+
+```
+##P2099 机工士姆斯塔迪奥
+###问题描述
+![](https://img2024.cnblogs.com/blog/3074083/202411/3074083-20241110203951357-1699368993.png)
+
+###解决方法
+```c
+#include <stdio.h>
+
+int main() {
+    int n, m, s, map[100][100]={0};
+    scanf("%d%d%d", &n, &m, &s);
+    int rc, ind, cnt=0;
+    for(int i=0; i<s; i++) {
+        scanf("%d%d", &rc, &ind);
+        switch (rc)
+        {
+        case 0:
+            for (int i = 0; i < m; i++)
+            {
+                map[ind-1][i] = 1;
+            }
+            break;
+        case 1:
+            for (int i = 0; i < n; i++)
+            {
+                map[i][ind-1] = 1;
+            }
+            break;
+
+        default:
+            break;
+        }
+    }
+    for(int i=0; i<n; i++) {
+        for(int j=0; j<m; j++) {
+            if(map[i][j] == 0) {
+                cnt++;
+            }
+        }
+    }
+    printf("%d", cnt);
+    return 0;
+}
+
+```
+##P1992 猜帽子游戏
+###问题描述
+![](https://img2024.cnblogs.com/blog/3074083/202410/3074083-20241015235850937-1679448357.png)
+###输入输出样例
+![](https://img2024.cnblogs.com/blog/3074083/202410/3074083-20241015235958910-1340552508.png)
+###解决方法
+```c
+#include <stdio.h>
+
+int main()
+{
+    int n;
+    scanf("%d", &n);
+    int hats[100];
+    for (int i = 0; i < n; i++)
+        scanf("%d", &hats[i]);
+
+    int k;
+    scanf("%d", &k);
+    for (int i = 0; i < k; i++)
+    {
+        int guesses[100];
+        int ycnt = 0, ncnt = 0, hcnt = 0;
+
+        for (int j = 0; j < n; j++)
+        {
+            scanf("%d", &guesses[j]);
+            if (guesses[j] != 0)
+            {                 
+                hcnt = 1;
+                if (guesses[j] == hats[j])
+                {
+                    ycnt++;
+                }
+                else
+                {
+                    ncnt++;
+                }
+            }
+        }
+
+        if (ncnt == 0 && ycnt > 0 && hcnt)
+        {
+            printf("Da Jiang!!!\n");
+        }
+        else
+        {
+            printf("Ai Ya\n");
+        }
+    }
+
+    return 0;
+}
+
+```
+
+##P2023 超人与奥特曼
+###问题描述
+![](https://img2024.cnblogs.com/blog/3074083/202411/3074083-20241111151354939-1541620174.png)
+
+###解决方法
+```c
+#include <stdio.h>
+
+enum
+{
+    M = 100
+};
+
+int main()
+{
+    int x[M];
+    int aotoaman = 0, surperman = 0;
+
+    int n, k = 0;
+    scanf("%d", &n);
+
+    int l = n - 1;
+    for (int i = 0; i < n; i++)
+    {
+        scanf("%d", &x[i]);
+    }
+    while (k != l + 1)
+    {
+        if (aotoaman >= surperman)
+        {
+            surperman += x[k++];
+        }
+        else if (aotoaman < surperman)
+        {
+            aotoaman += x[l--];
+        }
+    }
+    printf("%d %d", surperman, aotoaman);
+
+    return 0;
+}
+```
+##P1296 分形宇宙
+###问题描述
+![](https://img2024.cnblogs.com/blog/3074083/202411/3074083-20241110202850333-1831658722.png)
+
+###解决方法
+```c
+#include <stdio.h>
+#include <math.h>
+
+char canvas[10000][10000];
+void initCanvas(int size)
+{
+    for (int i = 0; i < size; i++)
+    {
+        for (int j = 0; j < size; j++)
+        {
+            canvas[i][j] = ' ';
+        }
+    }
+}
+
+void fra(int n, int x, int y)
+{
+    int size = pow(3, n - 2);
+    if (n == 1)
+    {
+        canvas[x][y] = 'X';
+        return;
+    }
+    fra(n - 1, x, y);
+    fra(n - 1, x + 2 * size, y);
+    fra(n - 1, x + size, y + size);
+    fra(n - 1, x, y + 2 * size);
+    fra(n - 1, x + 2 * size, y + 2 * size);
+}
+
+int main()
+{
+    int n;
+    scanf("%d", &n);
+    int size = pow(3, n - 1);
+    initCanvas(size);
+    fra(n, 0, 0);
+    
+    for (int i = 0; i < size; i++)
+    {
+        for (int j = 0; j < size; j++)
+        {
+            printf("%c", canvas[i][j]);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+```
+> 这是一道非常有趣的题 可玩性非常高~
+>
+> 有关分形，看看[这篇](https://zhuanlan.zhihu.com/p/277523719?utm_psn=1839293756580425728)介绍
+>
+> 有关本题，可以看看[这篇](https://blog.csdn.net/mili_j/article/details/130273454)思路讲解
+
+__另 （不建议使用的）偷鸡法__
+<details>
+<summary>点击展开代码</summary>
+
+```c
+#include <stdio.h>
+
+int main()
+{
+    int n;
+    scanf("%d", &n);
+    
+    switch (n)
+    {
+    case 1:
+        printf(
+            "X\n");
+        break;
+    case 2:
+        printf(
+            "X X\n"
+            " X \n"
+            "X X\n");
+        break;
+    case 3:
+        printf(
+            "X X   X X\n"
+            " X     X \n"
+            "X X   X X\n"
+            "   X X   \n"
+            "    X    \n"
+            "   X X   \n"
+            "X X   X X\n"
+            " X     X \n"
+            "X X   X X\n");
+        break;
+    case 4:
+        printf(
+            "X X   X X         X X   X X\n"
+            " X     X           X     X \n"
+            "X X   X X         X X   X X\n"
+            "   X X               X X   \n"
+            "    X                 X    \n"
+            "   X X               X X   \n"
+            "X X   X X         X X   X X\n"
+            " X     X           X     X \n"
+            "X X   X X         X X   X X\n"
+            "         X X   X X         \n"
+            "          X     X          \n"
+            "         X X   X X         \n"
+            "            X X            \n"
+            "             X             \n"
+            "            X X            \n"
+            "         X X   X X         \n"
+            "          X     X          \n"
+            "         X X   X X         \n"
+            "X X   X X         X X   X X\n"
+            " X     X           X     X \n"
+            "X X   X X         X X   X X\n"
+            "   X X               X X   \n"
+            "    X                 X    \n"
+            "   X X               X X   \n"
+            "X X   X X         X X   X X\n"
+            " X     X           X     X \n"
+            "X X   X X         X X   X X\n");
+        break;
+    case 5:
+        printf(
+            "X X   X X         X X   X X                           X X   X X         X X   X X\n"
+            " X     X           X     X                             X     X           X     X \n"
+            "X X   X X         X X   X X                           X X   X X         X X   X X\n"
+            "   X X               X X                                 X X               X X   \n"
+            "    X                 X                                   X                 X    \n"
+            "   X X               X X                                 X X               X X   \n"
+            "X X   X X         X X   X X                           X X   X X         X X   X X\n"
+            " X     X           X     X                             X     X           X     X \n"
+            "X X   X X         X X   X X                           X X   X X         X X   X X\n"
+            "         X X   X X                                             X X   X X         \n"
+            "          X     X                                               X     X          \n"
+            "         X X   X X                                             X X   X X         \n"
+            "            X X                                                   X X            \n"
+            "             X                                                     X             \n"
+            "            X X                                                   X X            \n"
+            "         X X   X X                                             X X   X X         \n"
+            "          X     X                                               X     X          \n"
+            "         X X   X X                                             X X   X X         \n"
+            "X X   X X         X X   X X                           X X   X X         X X   X X\n"
+            " X     X           X     X                             X     X           X     X \n"
+            "X X   X X         X X   X X                           X X   X X         X X   X X\n"
+            "   X X               X X                                 X X               X X   \n"
+            "    X                 X                                   X                 X    \n"
+            "   X X               X X                                 X X               X X   \n"
+            "X X   X X         X X   X X                           X X   X X         X X   X X\n"
+            " X     X           X     X                             X     X           X     X \n"
+            "X X   X X         X X   X X                           X X   X X         X X   X X\n"
+            "                           X X   X X         X X   X X                           \n"
+            "                            X     X           X     X                            \n"
+            "                           X X   X X         X X   X X                           \n"
+            "                              X X               X X                              \n"
+            "                               X                 X                               \n"
+            "                              X X               X X                              \n"
+            "                           X X   X X         X X   X X                           \n"
+            "                            X     X           X     X                            \n"
+            "                           X X   X X         X X   X X                           \n"
+            "                                    X X   X X                                    \n"
+            "                                     X     X                                     \n"
+            "                                    X X   X X                                    \n"
+            "                                       X X                                       \n"
+            "                                        X                                        \n"
+            "                                       X X                                       \n"
+            "                                    X X   X X                                    \n"
+            "                                     X     X                                     \n"
+            "                                    X X   X X                                    \n"
+            "                           X X   X X         X X   X X                           \n"
+            "                            X     X           X     X                            \n"
+            "                           X X   X X         X X   X X                           \n"
+            "                              X X               X X                              \n"
+            "                               X                 X                               \n"
+            "                              X X               X X                              \n"
+            "                           X X   X X         X X   X X                           \n"
+            "                            X     X           X     X                            \n"
+            "                           X X   X X         X X   X X                           \n"
+            "X X   X X         X X   X X                           X X   X X         X X   X X\n"
+            " X     X           X     X                             X     X           X     X \n"
+            "X X   X X         X X   X X                           X X   X X         X X   X X\n"
+            "   X X               X X                                 X X               X X   \n"
+            "    X                 X                                   X                 X    \n"
+            "   X X               X X                                 X X               X X   \n"
+            "X X   X X         X X   X X                           X X   X X         X X   X X\n"
+            " X     X           X     X                             X     X           X     X \n"
+            "X X   X X         X X   X X                           X X   X X         X X   X X\n"
+            "         X X   X X                                             X X   X X         \n"
+            "          X     X                                               X     X          \n"
+            "         X X   X X                                             X X   X X         \n"
+            "            X X                                                   X X            \n"
+            "             X                                                     X             \n"
+            "            X X                                                   X X            \n"
+            "         X X   X X                                             X X   X X         \n"
+            "          X     X                                               X     X          \n"
+            "         X X   X X                                             X X   X X         \n"
+            "X X   X X         X X   X X                           X X   X X         X X   X X\n"
+            " X     X           X     X                             X     X           X     X \n"
+            "X X   X X         X X   X X                           X X   X X         X X   X X\n"
+            "   X X               X X                                 X X               X X   \n"
+            "    X                 X                                   X                 X    \n"
+            "   X X               X X                                 X X               X X   \n"
+            "X X   X X         X X   X X                           X X   X X         X X   X X\n"
+            " X     X           X     X                             X     X           X     X \n"
+            "X X   X X         X X   X X                           X X   X X         X X   X X\n");
+        break;
+    default:
+        break;
+    }
+    return 0;
+}
+
+```
+</details>
+
+
+##P2100 考试座位号
+###问题描述
+![](https://img2024.cnblogs.com/blog/3074083/202411/3074083-20241111192928411-587433105.png)
+
+###解决方法
+```c
+#include <stdio.h>
+
+void printInfo(long long int info[][3], int m, int n)
+{
+    for (int i = 0; i < n; i++)
+        if (m == (int)info[i][1])
+            printf("%lld %lld\n", info[i][0], info[i][2]);
+}
+
+int main()
+{
+    int n;
+    scanf("%d", &n);
+    long long int info[10][3];
+    for (int i = 0; i < n; i++)
+        scanf("%lld %lld %lld", &info[i][0], &info[i][1], &info[i][2]);
+    int m;
+    scanf("%d", &m);
+    int query[10];
+    for (int i = 0; i < m; i++)
+        scanf("%d", &query[i]);
+    for (int i = 0; i < m; i++)
+        printInfo(info, query[i], n);
+
+    return 0;
+}
+```
+##P2101 一帮一
+###问题描述
+![](https://img2024.cnblogs.com/blog/3074083/202411/3074083-20241111200955962-192547701.png)
+
+###解决方法
+```c
+#include <stdio.h>
+
+int main()
+{
+    int n;
+    scanf("%d", &n);
+    int gender[50];
+    char name[50][20];
+    int isUsed[50] = {0};
+    for (int i = 0; i < n; i++)
+    {
+        scanf("%d", &gender[i]);
+        scanf("%s", name[i]);
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        if (isUsed[i])
+        {
+            continue;
+        }
+
+        for (int j = n - 1; j >= 0; j--)
+        {
+            if (i != j && !isUsed[j] && gender[i] != gender[j])
+            {
+                printf("%s %s\n", name[i], name[j]);
+                isUsed[i] = 1;
+                isUsed[j] = 1;
+                break;
+            }
+        }
+    }
+
+    return 0;
+}
+```
+
+##P1325 区间合并
+###问题描述
+![](https://img2024.cnblogs.com/blog/3074083/202411/3074083-20241111144210148-957155128.png)
+
+###解决方法
+```c
+#include <stdio.h>
+
+void sort(int s[], int e[], int n)
+{
+    for (int i = 0; i < n - 1; i++)
+        for (int j = 0; j < n - 1 - i; j++)
+            if (s[j] > s[j + 1])
+            {
+                int temps = s[j];
+                int tempe = e[j];
+                s[j] = s[j + 1];
+                e[j] = e[j + 1];
+                s[j + 1] = temps;
+                e[j + 1] = tempe;
+            }
+}
+
+void merge(int s[], int e[], int n)
+{
+    int start = s[0], end = e[0];
+    for (int i = 1; i < n; i++)
+    {
+        if (end < s[i])
+        {
+            printf("%d %d\n", start, end);
+            start = s[i];
+            end = e[i];
+        }
+        else if (end < e[i])
+        {
+            end = e[i];
+        }
+    }
+    printf("%d %d\n", start, end);
+}
+
+int main()
+{
+    int n;
+    scanf("%d", &n);
+    int s[n], e[n];
+    for (int i = 0; i < n; i++) scanf("%d %d", &s[i], &e[i]);
+    sort(s, e, n);
+    merge(s, e, n);
+
+    return 0;
+}
+
+```
+##P2045 数字蚯蚓
+###问题描述
+![](https://img2024.cnblogs.com/blog/3074083/202411/3074083-20241111151151677-84418255.png)
+
+###输入输出样例
+![](https://img2024.cnblogs.com/blog/3074083/202411/3074083-20241111151228344-894870455.png)
+
+###解决方法
+```c
+#include <stdio.h>
+#include <string.h>
+
+int main()
+{
+    char str[200], be[200], af[200];
+    fgets(str, 200, stdin);
+    int len = strlen(str);
+    int k;
+    scanf("%d", &k);
+
+    strcpy(af, str);
+    for (int i = 0; i < k; i++)
+    {
+        af[i] = af[k];
+    }
+    strcpy(be, str);
+    for (int i = k; i < len - 1; i++)
+    {
+        be[i] = be[k - 1];
+    }
+    printf("%s", be);
+    printf("%s", af);
+    return 0;
+}
+```
+#第三期完结！！！
+__看完了点个赞再走嘛__
