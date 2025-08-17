@@ -1031,22 +1031,22 @@ links:
   # Member item of page
   items:
     - {
-      title: "零",
-      intro: "Erhjiu's Blog",
-      link: "https://www.zeroqi.xyz/",
-      avatar: "/img/overall/avatar_erhjiu.jpg"
-    }
-    - {
       title: "Fluid Docs",
       intro: "主题使用指南",
       link: "https://hexo.fluid-dev.com/docs/",
       avatar: "/img/favicon.png"
     }
     - {
-      title: "Fluid Repo",
-      intro: "主题 GitHub 仓库",
-      link: "https://github.com/fluid-dev/hexo-theme-fluid",
-      avatar: "/img/favicon.png"
+      title: "零",
+      intro: "Erhjiu's Blog",
+      link: "https://www.zeroqi.xyz/",
+      avatar: "/img/overall/avatar_erhjiu.jpg"
+    }
+    - {
+      title: "茂茂物语",
+      intro: "茂茂的成长之路，包含前端常用知识、源码阅读笔记、各种奇淫技巧、日常提效工具等",
+      link: "https://notes.fe-mm.com",
+      avatar: "https://notes.fe-mm.com/logo.png"
     }
 
   # 当成员头像加载失败时，替换为指定图片
